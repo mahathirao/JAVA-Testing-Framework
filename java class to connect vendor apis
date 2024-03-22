@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class VendorAPIClient {
+    private static final String API_KEY = "YOUR_API_KEY";
+
+    public static void main(String[] args) {
+        try {
+            // Create a URL object with the API endpoint
+            URL url = new URL("https://api.vendor.com/endpoint");
+
+            // Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Set the request method
+            connection.setRequestMethod("GET");
+
+            // Set request headers
+            connection.setRequestProperty("Authorization", "Bearer " + API_KEY);
+
+            // Get the response code
+            int responseCode = connection.getResponseCode();
+
+            // Read the response from the API
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Print the response
+            System.out.println("Response Code: " + responseCode);
+            System.out.println("Response Body: " + response.toString());
+
+            // Close the connection
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
