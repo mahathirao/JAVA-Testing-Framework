@@ -27,3 +27,8 @@ public class VendorAPITest {
         assertTrue(response.contains("location"));
     }
 }
+
+
+Make sure to replace the base URI and endpoint ("/vendors/12345") with the actual URI and endpoint of the vendor API you're testing.
+
+This is a basic framework to get you started. You can expand and customize it further based on your specific testing requirements and the complexity of the vendor APIs you're testing.
