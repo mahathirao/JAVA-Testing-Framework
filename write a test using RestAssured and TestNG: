@@ -1,0 +1,29 @@
+
+
+Here's a simple example demonstrating how to write a test using RestAssured and TestNG:
+
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static org.testng.Assert.*;
+
+public class VendorAPITest {
+
+    @Test
+    public void testGetVendorDetails() {
+        // Define the base URI of the vendor API
+        baseURI = "https://api.example.com";
+
+        // Make a GET request to retrieve vendor details
+        String response = given()
+                            .when()
+                            .get("/vendors/12345")
+                            .then()
+                            .statusCode(200) // Assert that the response status code is 200
+                            .extract()
+                            .asString();
+
+        // Validate response content
+        assertTrue(response.contains("vendor_name"));
+        assertTrue(response.contains("location"));
+    }
+}
